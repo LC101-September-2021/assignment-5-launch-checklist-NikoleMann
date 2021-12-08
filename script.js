@@ -21,8 +21,11 @@ window.addEventListener("load", function() {
         event.preventDefault()
         formSubmission(pilot, copilot, fuelLevel, cargoLevel)
     })
+    
         
-        
+    //Indicate what is good or bad about the shuttle and whether it is ready for launch by using the DOM to update the CSS.
+
+    //Fetch some planetary JSON to update the mission destination with vital facts and figures about where the shuttle is headed.
 
 
         //formSubmission updates the li items if everything passes

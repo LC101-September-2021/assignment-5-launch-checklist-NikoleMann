@@ -17,14 +17,10 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 }
 
 function validateInput(testInput) {
-    console.log(testInput.value);
-    console.log(isNaN(testInput.value));
     if (testInput.value === "") {
-        console.log("undefined")
         return "undefined"
     }
     else if (isNaN(testInput.value)) {
-        console.log("testInput is working")
         return "Not a number"
     } else {
         return "Is a number"
@@ -42,8 +38,25 @@ function formSubmission(pilot, copilot, fuelLevel, cargoLevel) {
     else if (validateInput(fuelLevel) === "Not a number" || validateInput(cargoLevel) === "Not a number") {
         alert("Make sure to enter valid information for each field.")
     } else {
-        // make the status for each of the fields updated to what was put in. 
-        // this does nothing right now but if I take it out the function stops
+        document.getElementById("pilotStatus").innerHTML = `Pilot ${pilot.value} is ready.`;
+        document.getElementById("copilotStatus").innerHTML = `Co-pilot ${copilot.value} is ready.`;
+       if (fuelLevel.value < 10000) {
+            document.getElementById("launchStatus").style.color = "red"
+            document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch!"
+            document.getElementById("fuelStatus").innerHTML = "Fuel too low for launch."
+            document.getElementById("faultyItems").style.visibility = "visible"     
+        }
+       if (cargoLevel.value > 10000) {
+            document.getElementById("launchStatus").style.color = "red"
+            document.getElementById("launchStatus").innerHTML = "Shuttle not ready for launch!"
+            document.getElementById("cargoStatus").innerHTML = "Cargo too heavy for launch."
+            document.getElementById("faultyItems").style.visibility = "visible"
+        }
+        if (fuelLevel.value > 10000 && cargoLevel.value < 10000) {
+            document.getElementById("launchStatus").style.color = "green"
+            document.getElementById("launchStatus").innerHTML = "Shuttle ready for launch!"
+            document.getElementById("faultyItems").style.visibility = "visible"
+        }
     }
 }
 
