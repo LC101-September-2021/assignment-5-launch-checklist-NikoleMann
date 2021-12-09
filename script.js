@@ -1,6 +1,4 @@
-// Write your JavaScript code here!
 
-// const { validateInput, formSubmission } = require("./scriptHelper");
 
 window.addEventListener("load", function() {
     //this script adds an event when you hit the button "Submit", this event should:
@@ -21,40 +19,22 @@ window.addEventListener("load", function() {
         event.preventDefault()
         formSubmission(pilot, copilot, fuelLevel, cargoLevel)
     })
-    
-        
-    //Indicate what is good or bad about the shuttle and whether it is ready for launch by using the DOM to update the CSS.
-
-    //Fetch some planetary JSON to update the mission destination with vital facts and figures about where the shuttle is headed.
 
 
-        //formSubmission updates the li items if everything passes
-        //next if the cargo mass or fuel level are outside acceptable parameters they should be made visible with a message that they are
-        //not at acceptable levels. 
-        //in this case shuttle status should be red and read "Shuttle not ready for launch"
-        //if everything passes launch status should turn to green and read "Shuttle is ready for launch"    
-    
-    
-    
-    
-    
-
-    
-
-
-
-
-
-
-//    let listedPlanets;
-//    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
-//    let listedPlanetsResponse;
-//    listedPlanetsResponse.then(function (result) {
-//        listedPlanets = result;
-//        console.log(listedPlanets);
-//    }).then(function () {
-//        console.log(listedPlanets);
-//        // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
-//    })
+   let listedPlanets;
+   // Set listedPlanetsResponse equal to the value returned by calling myFetch()
+   let listedPlanetsResponse = myFetch();
+   listedPlanetsResponse.then(function (result) {
+       listedPlanets = result;
+       console.log(listedPlanets)
+    //    return listedPlanets;
+   }).then(function () {
+       console.log(listedPlanets);
+       let planet = pickPlanet(listedPlanets);
+        addDestinationInfo(document, planet.name, planet.diameter, planet.star, planet.distance, planet.moons, planet.image)
+       // Below this comment call the appropriate helper functions to pick a planet fom the list of planets and add that information to your destination.
+        //pick randon planet, assign it a variable, then use that with addDestinationInfo(document, exp: variable.diameter)
+    })
    
+    
 });

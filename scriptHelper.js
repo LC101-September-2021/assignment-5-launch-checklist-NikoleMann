@@ -1,19 +1,18 @@
 // Write your helper functions here!
 // require('isomorphic-fetch');
 
-function addDestinationInfo(document, name, diameter, star, distance, moons, imageUrl) {
-   // Here is the HTML formatting for our mission target div.
-   /*
-                <h2>Mission Destination</h2>
+function addDestinationInfo(document, name, diameter, star, distance, moons, image) {
+   document.getElementById("missionTarget").innerHTML =
+               ` <h2>Mission Destination</h2>
                 <ol>
-                    <li>Name: </li>
-                    <li>Diameter: </li>
+                    <li>Name: ${name} </li>
+                    <li>Diameter: ${diameter} </li>
                     <li>Star: ${star}</li>
-                    <li>Distance from Earth: </li>
-                    <li>Number of Moons: </li>
+                    <li>Distance from Earth: ${distance} </li>
+                    <li>Number of Moons: ${moons} </li>
                 </ol>
-                <img src="">
-   */
+                <img src="${image}"> `
+   
 }
 
 function validateInput(testInput) {
@@ -55,6 +54,8 @@ function formSubmission(pilot, copilot, fuelLevel, cargoLevel) {
         if (fuelLevel.value > 10000 && cargoLevel.value < 10000) {
             document.getElementById("launchStatus").style.color = "green"
             document.getElementById("launchStatus").innerHTML = "Shuttle ready for launch!"
+            document.getElementById("fuelStatus").innerHTML = "Fuel level high enough for launch."
+            document.getElementById("cargoStatus").innerHTML = "Cargo mass low enough for launch."
             document.getElementById("faultyItems").style.visibility = "visible"
         }
     }
@@ -62,14 +63,20 @@ function formSubmission(pilot, copilot, fuelLevel, cargoLevel) {
 
 async function myFetch() {
     let planetsReturned;
-
-    planetsReturned = await fetch().then( function(response) {
+    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response) {
+        return response.json();
         });
-
     return planetsReturned;
 }
 
 function pickPlanet(planets) {
+    //Using Math.random(), return one planet from the list with a randomly-selected index.
+    //generate random number 1-6 (0-5? index starts at 0)
+    //use that number as the index value for the planets array in the JSON file
+    
+    let randomNuber = Math.floor(Math.random()*5);
+    console.log(planets)
+    return planets[randomNuber];
 }
 
 module.exports.addDestinationInfo = addDestinationInfo;
